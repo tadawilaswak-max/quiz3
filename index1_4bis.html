@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الكويز رقم 01- Quiz N°01</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: #333;
+      direction: rtl;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      border-radius: 20px;
+      animation: fadeIn 0.5s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    header img {
+      height: 80px;
+      filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+      transition: transform 0.3s ease;
+    }
+
+    header img:hover {
+      transform: scale(1.05);
+    }
+
+    header h2 {
+      flex: 1;
+      text-align: center;
+      font-size: 1.5rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+
+    .btn:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .form-container {
+      background: #f8f9fa;
+      padding: 30px;
+      border-radius: 15px;
+      margin-top: 20px;
+    }
+
+    .form-title {
+      font-size: 1.8rem;
+      color: #2a5298;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #2a5298;
+      font-size: 1rem;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+    }
+
+    .note {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      color: #856404;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      line-height: 1.8;
+        text-align: center;
+         
+    }
+
+    .answer-code-note {
+      margin-top: 8px;
+      margin-bottom: 20px;
+      color: #856404;
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      padding: 12px;
+      border-radius: 10px;
+      font-weight: bold;
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    .compteur {
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #e74c3c;
+      background: #fdf0ef;
+      padding: 10px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .progress-text {
+      text-align: center;
+      color: #666;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .progress-bar {
+      background: #e0e0e0;
+      height: 12px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 25px;
+    }
+
+    .progress-bar div {
+      height: 100%;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      transition: width 0.5s ease;
+      border-radius: 10px;
+    }
+
+    .question-card {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    .question-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .question-number, .question-level {
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    .question-number {
+      background: #e3f2fd;
+      color: #1976d2;
+    }
+
+    .question-level {
+      background: #f3e5f5;
+      color: #7b1fa2;
+    }
+
+    .question-title {
+      margin-bottom: 25px;
+    }
+
+    .question-text-ar {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: #333;
+      margin-bottom: 15px;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      border-right: 4px solid #667eea;
+    }
+
+    .question-code {
+      background: #2d2d2d;
+      color: #f8f8f2;
+      padding: 15px;
+      border-radius: 10px;
+      font-family: 'Courier New', 'Consolas', monospace;
+      font-size: 1rem;
+      overflow-x: auto;
+      direction: ltr;
+      text-align: left;
+      margin-top: 10px;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: white;
+    }
+
+    .option-item:hover {
+      border-color: #667eea;
+      background: #f8f9ff;
+      transform: translateX(-5px);
+    }
+
+    .option-item.selected {
+      border-color: #667eea;
+      background: linear-gradient(135deg, #f8f9ff, #fff);
+      box-shadow: 0 2px 8px rgba(102,126,234,0.2);
+    }
+
+    .option-item input[type="radio"] {
+      margin-left: 15px;
+      transform: scale(1.2);
+      cursor: pointer;
+    }
+
+    .option-label {
+      min-width: 35px;
+      height: 35px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #667eea;
+      color: white;
+      border-radius: 50%;
+      font-weight: bold;
+      margin-left: 15px;
+    }
+
+    .option-text {
+      flex: 1;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .code-inline {
+      background: #2d2d2d;
+      color: #f8f8f2;
+      padding: 2px 8px;
+      border-radius: 5px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      direction: ltr;
+      display: inline-block;
+    }
+
+
+
+    .answer-area {
+      margin-top: 20px;
+    }
+
+    .answer-label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: #2a5298;
+      font-size: 1rem;
+    }
+
+    .answer-textbox {
+      width: 100%;
+      min-height: 140px;
+      padding: 14px;
+      border: 2px solid #dbe5ef;
+      border-radius: 12px;
+      font-size: 1rem;
+      line-height: 1.8;
+      resize: vertical;
+      font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+      background: #fcfdff;
+      transition: all 0.3s ease;
+    }
+
+    .answer-textbox:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102,126,234,0.12);
+      background: white;
+    }
+
+    .answer-help {
+      margin-top: 8px;
+      color: #666;
+      font-size: 0.92rem;
+    }
+
+    .navigation-buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .result-box {
+      text-align: center;
+      padding: 30px;
+    }
+    
+    .info-message {
+      background: #e8f0fe;
+      border-right: 5px solid #667eea;
+      padding: 20px;
+      border-radius: 15px;
+      margin: 25px 0;
+      text-align: right;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #2c3e50;
+      text-align: center;
+    }
+    
+    .colab-link {
+      display: inline-block;
+      margin-top: 20px;
+      background: #1f3b4c;
+      background: linear-gradient(135deg, #1f3b4c, #2c5a6e);
+      color: white;
+      text-decoration: none;
+      padding: 14px 30px;
+      border-radius: 50px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    .colab-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      background: linear-gradient(135deg, #2c5a6e, #1f3b4c);
+    }
+
+    .score-value {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #5151f3;
+      margin: 20px 0;
+    }
+
+    .status-box {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      color: #666;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        margin: 10px;
+        padding: 15px;
+      }
+
+      header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      header h2 {
+        font-size: 1rem;
+      }
+
+      header img {
+        height: 50px;
+      }
+
+      .question-text-ar {
+        font-size: 1rem;
+      }
+
+      .question-text-ar,
+      .question-code {
+       white-space: pre-wrap;
+      }
+
+      .question-code {
+        font-size: 0.85rem;
+      }
+
+      .btn {
+        padding: 8px 20px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="images/logo_faculte.png" alt="شعار الكلية" onerror="this.style.display='none'">
+    <h2>
+      كلية العلوم الاقتصادية والتجارية وعلوم التسيير<br>
+      قسم العلوم الاقتصادية<br>
+      السنة الأولى 
+      تداول وأسواق مالية
+    </h2>
+    <img src="images/logo_departement.png" alt="شعار القسم" onerror="this.style.display='none'">
+  </header>
+
+  <div class="container" id="start-page">
+    <div class="form-container">
+      <div class="form-title"> كويز رقم 02</div>
+      <div class="note">
+         هذا الكويز بنقسم الى جزئين <br>
+          <strong>الجزء الاول</strong> يحتوي على 50 سؤالاً يتم الاجابة عليهم كتابيا في الخانة المناسبة  <br>
+          سيتم تسجيل الإجابة تلقائياً بمجرد الضعط على إنهاء الاختبار<br>
+         <strong> الجزء الثاني</strong> عبارة عن كود يتم كتابته في google colab
+      </div>
+      
+      <div id="studentLookupMessage" style="text-align:center; margin:-5px 0 15px; font-weight:bold;"></div>
+      <div class="form-group">
+        <label>الاسم:</label>
+        <input type="text" id="name" placeholder="الاسم" required>
+      </div>
+
+      <div class="form-group">
+        <label>اللقب:</label>
+        <input type="text" id="surname" placeholder="اللقب" required>
+      </div>
+
+      <div class="form-group">
+        <label>رقم التسجيل:</label>
+        <input type="text" id="regNumber" placeholder=" رقم التسجيل" required>
+      </div>
+
+      <div class="form-group">
+        <label>البريد الإلكتروني:</label>
+        <input type="email" id="email" placeholder="example@univ.dz" required>
+      </div>
+
+      <div class="form-group">
+  <label>كود الاطلاع:</label>
+  <div style="
+    margin-top:10px;
+    background:#d6072d;
+    border:1px solid #ffc107;
+    color:#efedea;
+    padding:10px;
+    border-radius:8px;
+    text-align:center;
+    font-weight:bold;
+    line-height:1.8;
+  ">
+   قبل الضغط على "ابدأ الكويز"، تأكد من الاحتفاظ بكود الاطلاع، لأنه سيُستخدم لاحقاً لمعرفة نتائجك والاطلاع على إجابتك
+  </div>
+  <input type="text" id="answerCode" placeholder="يتم جلب الكود تلقائياً" readonly required>
+
+</div>
+
+      <div style="text-align: center;">
+        <button class="btn" onclick="startExam()"> ابدأ الكويز</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container hidden" id="question-page">
+    <div class="compteur" id="compteur"> الوقت المستغرق: 0 دقيقة و 0 ثانية</div>
+    <div class="progress-text" id="progress-text">السؤال 1 / 40</div>
+    <div class="progress-bar"><div id="progress"></div></div>
+
+    <div class="question-card">
+      <div class="question-meta">
+        <span class="question-number" id="question-number-badge">كل سؤال على 0,5 نقطة</span>
+        <span class="question-level" id="question-level-badge">المستوى: </span>
+      </div>
+
+      <div class="question-title">
+        <div id="question-title"></div>
+      </div>
+
+      <div class="answer-area">
+        <label class="answer-label" for="written-answer">اكتب الإجابة هنا:</label>
+        <textarea id="written-answer" class="answer-textbox" placeholder="اكتب إجابتك هنا بشكل واضح..."></textarea>
+        <div class="answer-help">يتم حفظ الإجابة تلقائياً عند الانتقال إلى السؤال التالي أو السابق.</div>
+      </div>
+    </div>
+
+    <div class="navigation-buttons">
+      <button class="btn" onclick="previousQuestion()">▶ السابق</button>
+      <button class="btn" id="next-btn" onclick="nextQuestion()">التالي◀ </button>
+      <button class="btn hidden" id="finish-btn" onclick="endExam()"> إنهاء الاختبار</button>
+    </div>
+  </div>
+
+  <div class="container hidden" id="result-page">
+    <div class="result-box">      
+      <div class="info-message">
+        <strong>شكراً على إتمام الكويز</strong><br>
+      </div>
+      
+      <p id="student-summary" style="font-size: 1.1rem; margin: 20px 0; background: #f0f2f5; padding: 12px; border-radius: 12px;"></p>
+      
+      <div class="score-value">
+         النتائج قيد المراجعة
+      </div>
+      
+      <div id="save-status" class="status-box" style="background: #e9f7ef; color: #2e6b3e;">
+        جاري حفظ إجاباتك...
+      </div>
+      
+      <div style="text-align: center; margin-top: 35px;">
+      <a id="colab-part2-link" href="#" target="_blank" class="btn" style="text-decoration: none;">
+        انتقل إلى الجزء الثاني من الكويز على Google Colab
+      </a>
+      </div>
+
+      
+      <button class="btn" id="retry-save-btn" onclick="saveAnswersToGoogleSheet(true)" style="margin-top: 25px; background: #4a6fa5;">🔄 إعادة محاولة الحفظ (إن لزم)</button>
+    </div>
+  </div>
+
+  
+  <script>
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxD_dQqN6P_pILjphwKtcbyMbA7_RaVM_R6xjHv4SqJ9zy7qKx89aq3clZZXfLaO9Qe/exec';
+    const COLAB_PART2_URL = 'index1_5bis.html'; 
+
+    const questions = [
+        
+    {
+        q_ar: 'ما هي الطريقة الصحيحة لاستيراد مكتبة numpy؟',
+        q_code: ` numpy`,
+        answerText: 'import numpy as np',
+        acceptableAnswers: ['import numpy as np']
+      },
+    
+    
+    {
+        q_ar: 'ما هي المكتبة المستخدمة في رسم البيانات؟',
+        q_code: `رسم البيانات`,
+        answerText: 'matplotlib',
+        acceptableAnswers: ['matplotlib']
+      },
+    
+    {
+        q_ar: 'ما هي الدالة المستخدمة لرسم خط بياني؟',
+        q_code: `x = [1,2]\ny=[3,4]`,
+        answerText: 'plt.plot()',
+        acceptableAnswers: ['plt.plot()', 'plot']
+      },
+    {
+        q_ar: 'ما هي النتيجة المتوقعة لتنفيذ الكود التالي؟',
+        q_code: `count = 0\nwhile count < 3:\n    print(count)\n    count += 1`,
+        answerText: '0 1 2',
+        acceptableAnswers: ['0 1 2', '0\n1\n2', '0,1,2', '0, 1, 2']
+      },
+    
+    {
+        q_ar: 'ما هي الدالة المستخدمة لعرض الرسم؟',
+        q_code: `عرض الرسم`,
+        answerText: 'plt.show()',
+        acceptableAnswers: ['plt.show()', 'show()']
+      },
+    {
+        q_ar: 'ما هي النتيجة المتوقعة لتنفيذ الكود التالي؟',
+        q_code: `x, y, z = 1, 2, 3\nprint(y)`,
+        answerText: '2',
+        acceptableAnswers: ['2']
+      },
+    {
+        q_ar: 'ما هي الدالة المستخدمة لرسم مخطط دائري؟',
+        q_code: `مخطط دائري`,
+        answerText: 'plt.pie()',
+        acceptableAnswers: ['plt.pie()', 'pie']
+      },
+    
+    
+    {
+        q_ar: 'ما هو الأمر الصحيح لاستيراد matplotlib؟',
+        q_code: `استيراد مكتبة الرسم`,
+        answerText: 'import matplotlib.pyplot as plt',
+        acceptableAnswers: ['import matplotlib.pyplot as plt']
+      },
+    {
+      q_ar: 'ما هو شكل الرسم الناتج عن تنفيذ الكود التالي؟',
+      q_code: `import matplotlib.pyplot as plt
+
+    data = [10, 12, 12, 15, 18, 20, 20, 20]
+
+    plt.hist(data)
+    plt.title("توزيع البيانات")
+    plt.show()`,
+      answerText: 'مدرج تكراري يوضح توزيع القيم مع تكرار أكبر عند 20',
+      acceptableAnswers: [
+        'مدرج تكراري',
+        'Histogram',
+        'توزيع القيم',
+        'الأعمدة تمثل تكرار القيم',
+        'أكبر تكرار عند 20'
+      ]
+    },
+    {
+        q_ar: 'ما هي النتيجة المتوقعة لتنفيذ الكود التالي؟',
+        q_code: `import numpy as np\narr = np.array([1,2,3])\nprint(arr * arr)`,
+        answerText: '[1 4 9]',
+        acceptableAnswers: ['[1 4 9]', '[1, 4, 9]']
+      },
+    
+    {
+        q_ar: 'اكتب طريقة الوصول إلى عمر الشخص في القاموس التالي:',
+        q_code: `person = {"name": "Ahmed", "age": 30}`,
+        answerText: `person["age"]`,
+        acceptableAnswers: [`person["age"]`, `person['age']`]
+      },
+    
+    {
+        q_ar: 'ما الفرق الأساسي بين list و ndarray في numpy؟',
+        q_code: `list vs ndarray`,
+        answerText: 'ndarray أسرع ويدعم العمليات الشعاعية',
+        acceptableAnswers: ['ndarray أسرع', 'يدعم العمليات الشعاعية', 'أسرع وعمليات مباشرة على العناصر', 'vectorized operations']
+      },
+    
+    {
+        q_ar: 'ما هي النتيجة المتوقعة؟',
+        q_code: `import numpy as np\na = np.array([1,2,3])\nprint(a + 5 * 2)`,
+        answerText: '[11 12 13]',
+        acceptableAnswers: ['[11 12 13]', '[11, 12, 13]']
+      },
+    {
+        q_ar: 'ما هي النتيجة المتوقعة لتنفيذ الكود التالي؟',
+        q_code: `import numpy as np\narr = np.array([1,2,3,4])\nprint(arr.mean(), arr.std())`,
+        answerText: '2.5 1.118...',
+        acceptableAnswers: ['2.5', '2.5 1.118', '2.5 1.11']
+      },    
+  
+    {
+        q_ar: 'لماذا تعتبر العمليات في numpy أسرع من القوائم العادية؟',
+        q_code: `numpy performance`,
+        answerText: 'لأنها مكتوبة بلغة C وتستخدم عمليات شعاعية',
+        acceptableAnswers: ['لغة C', 'vectorized operations', 'أسرع بسبب التنفيذ الداخلي']
+      },
+    
+    {
+        q_ar: 'ما هي النتيجة المتوقعة لتنفيذ الكود التالي ؟',
+        q_code: `x = [1, 2, 3]\ny = x\ny[0] = 10\nprint(x, y)`,
+        answerText: '[10, 2, 3] [10, 2, 3]',
+        acceptableAnswers: [
+            '[10, 2, 3] [10, 2, 3]',
+            '[10,2,3] [10,2,3]',
+            '(10, 2, 3) (10, 2, 3)'
+          ]
+      },
+    {
+        q_ar: 'ما هي النتيجة المتوقعة؟',
+        q_code: `import pandas as pd\ndf = pd.DataFrame({"A":[1,2,3], "B":[4,5,6]})\nprint(df["A"].sum())`,
+        answerText: '6',
+        acceptableAnswers: ['6']
+      },
+    
+
+    {
+        q_ar: 'ما هي الدالة المستخدمة لإضافة عنوان للرسم？',
+        q_code: `عنوان الرسم`,
+        answerText: 'plt.title()',
+        acceptableAnswers: ['plt.title()', 'title']
+      },
+    {
+        q_ar: 'ما هي النتيجة المتوقعة لتنفيذ الكود التالي؟',
+        q_code: `for i in range(3):\n    print(i)\nelse:\n    print("Done")`,
+        answerText: '0 1 2 Done',
+        acceptableAnswers: [
+          '0 1 2 Done',
+           '0\n1\n2\nDone',
+          '0,1,2,Done'
+          ]
+        },
+    {
+        q_ar: 'ما هي النتيجة المتوقعة؟',
+        q_code: `import pandas as pd\ndf = pd.DataFrame({"A":[1,2,3]})\nprint(type(df["A"]))`,
+        answerText: 'Series',
+        acceptableAnswers: ['Series', "<class 'pandas.core.series.Series'>"]
+      },
+    {
+        q_ar: 'ما هي وظيفة DataFrame مقارنة بـ Series؟',
+        q_code: `DataFrame vs Series`,
+        answerText: 'DataFrame جدول ثنائي البعد و Series عمود واحد',
+        acceptableAnswers: ['ثنائي البعد', 'جدول', 'Series عمود واحد', 'DataFrame عدة أعمدة']
+      },
+    {
+        q_ar: 'ما هي النتيجة المتوقعة؟',
+        q_code: `import matplotlib.pyplot as plt\nplt.plot([1,2,3])\nplt.title("Test")`,
+        answerText: 'لن يظهر الرسم',
+        acceptableAnswers: ['لن يظهر الرسم', 'يجب استعمال plt.show()', 'لا يظهر بدون show']
+      },
+    {
+        q_ar: 'ما هي النتيجة المتوقعة لتنفيذ الكود التالي؟',
+        q_code: `import numpy as np\na = np.array([1,2,3])\nb = np.array([1,2])\nprint(a + b)`,
+        answerText: 'خطأ',
+        acceptableAnswers: ['Error', 'ValueError', 'عدم توافق الأبعاد', 'shapes not aligned']
+      },
+    {
+        q_ar: 'ما هي النتيجة المتوقعة لتنفيذ الكود التالي؟',
+        q_code: `for i in range(6):\n    if i == 3:\n        break\n    print(i)`,
+        answerText: '0 1 2',
+        acceptableAnswers: ['0 1 2', '0\n1\n2', '0,1,2', '0, 1, 2']
+      },
+    {
+        q_ar: 'ما هي النتيجة المتوقعة لتنفيذ الكود التالي؟',
+        q_code: `import numpy as np\narr = np.array([1,2,3])\nprint(arr + 2)`,
+        answerText: '[3 4 5]',
+        acceptableAnswers: ['[3 4 5]', '[3, 4, 5]']
+      },
+    {
+        q_ar: 'ما هي النتيجة المتوقعة لتنفيذ الكود التالي؟',
+        q_code: `import csv\nwith open("data.csv", "r") as file:\n    reader = csv.reader(file)\n    for row in reader:\n        print(len(row))`,
+        answerText: 'عدد الأعمدة في كل سطر',
+        acceptableAnswers: ['عدد الأعمدة', 'عدد عناصر السطر', 'number of columns', 'length of row']
+     },
+    
+    {
+        q_ar: 'ما هي النتيجة المتوقعة لتنفيذ الكود التالي؟',
+        q_code: `age = 18\nprint(age >= 18)`,
+        answerText: 'True',
+        acceptableAnswers: ['True', 'true']
+      },
+    {
+        q_ar: 'ما نوع الكائن الناتج عن np.array？',
+        q_code: `np.array([1,2,3])`,
+        answerText: 'ndarray',
+        acceptableAnswers: ['ndarray']
+      },
+
+    {
+        q_ar: 'ما هي النتيجة المتوقعة لتنفيذ الكود التالي؟',
+        q_code: `import numpy as np
+
+      a = np.array([2, 4, 6])
+      b = np.array([1, 3, 5])
+
+      print(a * b)`,
+        answerText: '[2 12 30]',
+        acceptableAnswers: [
+          '[2 12 30]',
+          '[2, 12, 30]',
+          'الضرب عنصر بعنصر',
+          'element-wise'
+        ]
+      },
+    {
+        q_ar: 'ما هي النتيجة المتوقعة؟',
+        q_code: `import numpy as np\na = np.array([1,2,3])\nb = np.array([4,5,6])\nprint(a + b)`,
+        answerText: '[5 7 9]',
+        acceptableAnswers: ['[5 7 9]', '[5, 7, 9]']
+      },
+
+      {
+        q_ar: 'ما هي الدالة التي تعرض آخر 5 أسطر من DataFrame؟',
+        q_code: `عرض البيانات`,
+        answerText: 'df.tail()',
+        acceptableAnswers: ['df.tail()', 'tail()']
+      },
+    
+    {
+        q_ar: 'ما هي الدالة التي تحسب المتوسط في numpy؟',
+        q_code: `array = np.array([1,2,3])`,
+        answerText: 'array.mean()',
+        acceptableAnswers: ['array.mean()', 'mean()']
+      },
+    {
+            q_ar: 'ما هي النتيجة المتوقعة لتنفيذ الكود التالي؟',
+            q_code: `for i in range(4):\n    print(i)`,
+            answerText: '0 1 2 3',
+            acceptableAnswers: ['0 1 2 3', '0\n1\n2\n3', '0,1,2,3', '0, 1, 2, 3']
+          },
+    {
+        q_ar: 'ما هي النتيجة المتوقعة؟',
+        q_code: `import numpy as np\narr = np.array([1,2,3,4])\nprint(arr.sum())`,
+        answerText: '10',
+        acceptableAnswers: ['10']
+      },
+    {
+            q_ar: 'ما هو الخطأ المرتكب في الكود التالي؟',
+            q_code: `def show():\nprint("Hello")`,
+            answerText: 'IndentationError',
+            acceptableAnswers: [
+              'IndentationError',
+              'خطأ في المسافة البادئة',
+              'خطأ المسافات البادئة',
+              'خطأ في الإزاحة'
+            ]
+          },
+    
+    {
+        q_ar: 'ما هي الطريقة الصحيحة لإنشاء DataFrame في pandas؟',
+        q_code: `إنشاء جدول`,
+        answerText: 'pd.DataFrame()',
+        acceptableAnswers: ['pd.DataFrame()', 'DataFrame']
+      },
+    {
+        q_ar: 'ما هي الطريقة الصحيحة لاستيراد pandas؟',
+        q_code: `استيراد pandas`,
+        answerText: 'import pandas as pd',
+        acceptableAnswers: ['import pandas as pd']
+      },
+    {
+            q_ar: 'ما هي النتيجة المتوقعة لتنفيذ الكود التالي؟',
+            q_code: `L = [1, 2, 3]\nL[1] = 9\nprint(L)`,
+            answerText: '[1, 9, 3]',
+            acceptableAnswers: ['[1, 9, 3]', '[1,9,3]']
+          },
+    
+    {
+            q_ar: 'ما نوع الخطأ المتوقع في الكود التالي؟',
+            q_code: `d = {"name": "Ahmed"}\nprint(d["age"])`,
+            answerText: 'KeyError',
+            acceptableAnswers: [
+              'KeyError',
+              'خطأ KeyError',
+              'المفتاح غير موجود',
+              'طلب مفتاح غير موجود'
+            ]
+          },
+    {
+        q_ar: 'ما هو الهيكل ثنائي الأبعاد في pandas؟',
+        q_code: `هيكل بيانات`,
+        answerText: 'DataFrame',
+        acceptableAnswers: ['DataFrame']
+      },
+    {
+        q_ar: 'ما هي النتيجة المتوقعة لتنفيذ الكود التالي؟',
+        q_code: `import numpy as np
+
+      a = np.array([2, 4, 6])
+      b = np.array([1, 3, 5])
+
+      print(a + b)`,
+        answerText: '[3 7 11]',
+        acceptableAnswers: [
+          '[3 7 11] ',
+          'الجمع ثم الضرب عنصر بعنصر',
+          'element-wise'
+        ]
+      },
+
+    {
+        q_ar: 'ما هي النتيجة المتوقعة؟',
+        q_code: `import csv\nwith open("data.csv", "r") as file:\n    reader = csv.reader(file)\n    print(type(reader))`,
+        answerText: 'csv reader object',
+        acceptableAnswers: ['csv reader object', "<class '_csv.reader'>"]
+      },
+    {
+        q_ar: 'ما هو الهيكل أحادي البعد في pandas؟',
+        q_code: `هيكل بيانات`,
+        answerText: 'Series',
+        acceptableAnswers: ['Series']
+      },
+    
+    
+    {
+        q_ar: 'ما هي الدالة المستخدمة لقراءة ملف CSV في pandas؟',
+        q_code: `قراءة ملف`,
+        answerText: 'pd.read_csv()',
+        acceptableAnswers: ['pd.read_csv()', 'read_csv']
+      },
+    {
+        q_ar: 'ما هي النتيجة المتوقعة؟',
+        q_code: `import pandas as pd\ndf = pd.DataFrame({"A":[1,2]})\nprint(df.shape)`,
+        answerText: '(2, 1)',
+        acceptableAnswers: ['(2, 1)', '2,1']
+      },
+    
+    {
+        q_ar: 'ما هي الدالة التي تعرض أول 5 أسطر من DataFrame؟',
+        q_code: `عرض البيانات`,
+        answerText: 'df.head()',
+        acceptableAnswers: ['df.head()', 'head()']
+      },
+    {
+            q_ar: 'ما نوع الخطأ المتوقع عند محاولة تعديل عنصر داخل tuple؟',
+            q_code: `t = (1, 2, 3)\nt[0] = 5`,
+            answerText: 'TypeError',
+            acceptableAnswers: [
+              'TypeError',
+              'خطأ TypeError',
+              'لا يمكن تعديل tuple',
+              'الصفوف غير قابلة للتغيير'
+            ]
+          },
+
+    {
+        q_ar: 'ما هي وظيفة السطر التالي؟',
+        q_code: `reader = csv.DictReader(file)`,
+        answerText: 'قراءة CSV على شكل قاموس',
+        acceptableAnswers: ['قراءة كقاموس', 'dictionary', 'dict', 'قراءة البيانات كمفاتيح وقيم']
+      },
+    {
+        q_ar: 'اكتب طريقة الوصول إلى العنصر الثاني في القائمة التالية:',
+        q_code: `numbers = [10, 20, 30]`,
+        answerText: 'numbers[1]',
+         acceptableAnswers: ['numbers[1]']
+      },
+    {
+        q_ar: 'ما هي الدالة التي تحسب المتوسط في pandas؟',
+        q_code: `df["col"]`,
+        answerText: 'mean()',
+        acceptableAnswers: ['mean()', 'df.mean()']
+      }
+    ];
+    let currentQuestion = 0;
+    let answers = new Array(questions.length).fill('');
+    let compteur = null;
+    const totalQuestions = questions.length;
+    const totalTime = totalQuestions * 120;
+    let remainingTime = totalTime;
+    let examFinished = false;
+    let saveAttempted = false;
+
+    window.addEventListener('DOMContentLoaded', function () {
+      const params = new URLSearchParams(window.location.search);
+      const regNumberFromUrl = params.get('regNumber');
+      const regInput = document.getElementById('regNumber');
+
+      if (regNumberFromUrl && regInput) {
+        regInput.value = regNumberFromUrl;
+        regInput.readOnly = true;
+        fillStudentData(regNumberFromUrl);
+      }
+
+      const colabLink = document.getElementById('colab-part2-link');
+      if (colabLink) colabLink.href = COLAB_PART2_URL;
+    });
+
+    async function fillStudentData(regNumber) {
+  const nameInput = document.getElementById('name');       
+  const surnameInput = document.getElementById('surname'); 
+  const answerCodeInput = document.getElementById('answerCode'); 
+  const message = document.getElementById('studentLookupMessage');
+
+  if (!regNumber || !nameInput || !surnameInput || !answerCodeInput) return;
+
+  if (message) {
+    message.textContent = 'جارٍ جلب معلومات الطالب...';
+    message.style.color = '#0d6efd';
+  }
+
+  try {
+    const response = await fetch(`${GOOGLE_SCRIPT_URL}?regNumber=${encodeURIComponent(regNumber)}&sheet=students`);
+    const data = await response.json();
+
+    if (data.status === 'success' && data.allowed) {
+      nameInput.value = data.surname || '';
+      surnameInput.value = data.name || '';
+      answerCodeInput.value = data.answerCode || data.code || '';
+
+      nameInput.readOnly = true;
+      surnameInput.readOnly = true;
+      answerCodeInput.readOnly = true;
+
+      if (message) {
+        message.textContent = 'تم جلب الاسم واللقب وكود الاطلاع بنجاح، يرجى كتابة البريد الإلكتروني فقط.';
+        message.style.color = 'green';
+      }
+
+    } else {
+      if (message) {
+        message.textContent = data.message || 'رقم التسجيل غير موجود في ورقة students.';
+        message.style.color = 'red';
+      }
+    }
+
+  } catch (error) {
+    if (message) {
+      message.textContent = 'تعذر جلب معلومات الطالب. تحقق من الاتصال أو من كود Google Apps Script.';
+      message.style.color = 'red';
+    }
+  }
+}
+    function validateForm() {
+      const inputs = document.querySelectorAll('#start-page input');
+      for (const input of inputs) {
+        if (!input.value.trim()) {
+          alert('يرجى ملء جميع الحقول');
+          return false;
+        }
+      }
+      return true;
+    }
+
+    function startExam() {
+      if (!validateForm()) return;
+      document.getElementById('start-page').classList.add('hidden');
+      document.getElementById('question-page').classList.remove('hidden');
+      renderQuestion();
+      startCompteur();
+    }
+
+    function startCompteur() {
+      updateCompteurText();
+      compteur = setInterval(() => {
+        if (examFinished) return;
+        remainingTime--;
+        updateCompteurText();
+        if (remainingTime <= 0) endExam(true);
+      }, 1000);
+    }
+
+    function updateCompteurText() {
+      const elapsedTime = totalTime - Math.max(remainingTime, 0);
+      document.getElementById('compteur').textContent = `الوقت المستغرق: ${formatTime(elapsedTime)}`;
+    }
+
+    function formatTime(seconds) {
+      const minutes = Math.floor(seconds / 60);
+      const secs = seconds % 60;
+      return `${minutes} دقيقة و ${secs} ثانية`;
+    }
+
+    function getQuestionLevel(index) {
+      if (index < 7) return '📘';
+      if (index < 14) return '📙';
+      return '📗';
+    }
+
+    function escapeHtml(text) {
+      if (text === undefined || text === null) return '';
+      const div = document.createElement('div');
+      div.textContent = String(text);
+      return div.innerHTML;
+    }
+
+    function formatQuestionTitle(question, questionNumber) {
+      let html = `<div class="question-number">السؤال ${questionNumber}</div>`;
+      if (question.q_ar) {
+        html += `<div class="question-text-ar">${escapeHtml(question.q_ar)}</div>`;
+      }
+      if (question.q_code && question.q_code.trim() !== '') {
+        const codeHtml = escapeHtml(question.q_code).replace(/\n/g, '<br>').replace(/  /g, '&nbsp;&nbsp;');
+        html += `<div class="question-code">${codeHtml}</div>`;
+      }
+      return html;
+    }
+
+    function renderQuestion() {
+      const q = questions[currentQuestion];
+      document.getElementById('question-title').innerHTML = formatQuestionTitle(q, currentQuestion + 1);
+      document.getElementById('question-level-badge').textContent = getQuestionLevel(currentQuestion);
+      document.getElementById('progress-text').textContent = `السؤال ${currentQuestion + 1} من ${totalQuestions}`;
+      document.getElementById('progress').style.width = `${((currentQuestion + 1) / totalQuestions) * 100}%`;
+
+      const answerBox = document.getElementById('written-answer');
+      answerBox.value = answers[currentQuestion] || '';
+      answerBox.oninput = saveCurrentAnswer;
+
+      document.getElementById('finish-btn').classList.toggle('hidden', currentQuestion !== totalQuestions - 1);
+      document.getElementById('next-btn').classList.toggle('hidden', currentQuestion === totalQuestions - 1);
+    }
+
+    function saveCurrentAnswer() {
+      const answerBox = document.getElementById('written-answer');
+      if (answerBox) answers[currentQuestion] = answerBox.value.trim();
+    }
+
+    function nextQuestion() {
+      saveCurrentAnswer();
+      if (currentQuestion < totalQuestions - 1) {
+        currentQuestion++;
+        renderQuestion();
+      }
+    }
+
+    function previousQuestion() {
+      saveCurrentAnswer();
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        renderQuestion();
+      }
+    }
+
+    function endExam(fromCompteur = false) {
+      if (examFinished) return;
+      saveCurrentAnswer();
+      examFinished = true;
+      clearInterval(compteur);
+
+      document.getElementById('question-page').classList.add('hidden');
+      document.getElementById('result-page').classList.remove('hidden');
+
+      const fullName = `${document.getElementById('name').value.trim()} ${document.getElementById('surname').value.trim()}`;
+      const regNum = document.getElementById('regNumber').value.trim();
+      const email = document.getElementById('email').value.trim();
+      
+      document.getElementById('student-summary').innerHTML = `
+        <strong>الطالب(ة):</strong> ${(fullName)}<br>
+        <strong>رقم التسجيل:</strong> ${escapeHtml(regNum)}<br>
+        <strong>البريد الإلكتروني:</strong> ${(email)}<br>
+        <strong>كود الاطلاع على ورقة الإجابة:</strong> ${escapeHtml(document.getElementById('answerCode').value.trim())}
+      `;
+      
+      // حفظ الإجابات فور الانتهاء
+      saveAnswersToGoogleSheet(false);
+    }
+    
+    function buildPayloadForSaving() {
+      const durationTaken = totalTime - Math.max(remainingTime, 0);
+      return {
+        name: document.getElementById('name').value.trim(),
+        surname: document.getElementById('surname').value.trim(),
+        regNumber: document.getElementById('regNumber').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        answerCode: document.getElementById('answerCode').value.trim(),
+        duration: durationTaken,
+        answers: JSON.stringify(
+          questions.map((q, i) => ({
+            questionArabic: q.q_ar,
+            questionCode: q.q_code || '',
+            studentAnswer: answers[i] || ''
+          }))
+        )
+      };
+    }
+
+    function saveAnswersToGoogleSheet(showRetryMessage = false) {
+      const saveStatusDiv = document.getElementById('save-status');
+      const retryBtn = document.getElementById('retry-save-btn');
+      
+      if (!saveStatusDiv) return;
+      
+      if (!saveAttempted || showRetryMessage) {
+        saveStatusDiv.innerHTML = ' جاري حفظ إجاباتك ... يرجى الانتظار';
+        saveStatusDiv.style.background = "#fff3cd";
+        saveStatusDiv.style.color = "#856404";
+      }
+      
+      const payload = buildPayloadForSaving();
+      const formData = new FormData();
+      Object.keys(payload).forEach(key => formData.append(key, payload[key]));
+      
+      fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+        saveStatusDiv.innerHTML = `
+        <div class="info-message">
+        <strong>تم تسجيل إجاباتك بنجاح</strong><br>
+        </div>
+        `;
+        saveStatusDiv.style.background = "transparent";
+        saveStatusDiv.style.color = "#2c3e50";
+
+        saveAttempted = true;
+        if (retryBtn) retryBtn.style.display = 'none';
+        }else {
+          saveStatusDiv.innerHTML = ' حدث خطأ أثناء حفظ الإجابات: ' + (data.message || 'خطأ غير معروف') + '<br> يمكنك استخدام زر "إعادة محاولة الحفظ" لاحقاً.';
+          saveStatusDiv.style.background = "#f8d7da";
+          saveStatusDiv.style.color = "#721c24";
+          if (retryBtn) retryBtn.style.display = 'inline-block';
+        }
+      })
+      .catch(error => {
+        saveStatusDiv.innerHTML = ' تعذر الاتصال بخادم حفظ البيانات: ' + error.message + '<br> يرجى التحقق من اتصال الإنترنت وإعادة المحاولة لاحقاً.';
+        saveStatusDiv.style.background = "#f8d7da";
+        saveStatusDiv.style.color = "#721c24";
+        if (retryBtn) retryBtn.style.display = 'inline-block';
+      });
+    }
+  </script>
+
+</body>
+</html>

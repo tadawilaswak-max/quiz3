@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تعليمات الكويز</title>
+  <style>
+    :root {
+      --primary: #0d6efd;
+      --primary-dark: #0a58ca;
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --success: #198754;
+      --warning-bg: #fff8e6;
+      --warning-border: #f5c542;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #eef4ff, #f8fbff);
+      color: var(--text);
+      direction: rtl;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 16px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      border: 1px solid rgba(13, 110, 253, 0.08);
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #080166, #82b1e4);
+      color: white;
+      padding: 30px 24px;
+      text-align: center;
+    }
+
+    .hero img {
+      width: 100%;
+      max-width: 120px;
+      height: auto;
+      border-radius: 18px;
+      border: 4px solid rgba(255,255,255,0.35);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+      display: block;
+      margin: 0 auto 20px;
+      background: #ffffff;
+      object-fit: cover;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 2rem;
+    }
+
+    .hero p {
+      margin: 0;
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    .content {
+      padding: 28px;
+    }
+
+    .section {
+      margin-bottom: 28px;
+      
+    }
+
+    .section h2 {
+      color: var(--primary);
+      margin-top: 0;
+      margin-bottom: 14px;
+      font-size: 1.35rem;
+      text-align: center;
+    }
+
+    .section p,
+    .section li {
+      line-height: 1.9;
+      font-size: 1rem;
+    }
+
+    .section ul {
+      margin: 0;
+      padding-right: 20px;
+    }
+
+    .notice {
+      background: var(--warning-bg);
+      border: 1px solid var(--warning-border);
+      border-radius: 14px;
+      padding: 16px 18px;
+      color: #7a5a00;
+      font-weight: 600;
+      line-height: 1.8;
+      text-align: center;
+    }
+
+    .resources {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+    }
+
+    .resource-card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      background: #fbfdff;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .resource-card img {
+      width: 100%;
+      border-radius: 10px;
+      margin: 10px 0;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .resource-card img:hover {
+      transform: scale(1.05);
+    }
+
+    .resource-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 18px rgba(13, 110, 253, 0.08);
+    }
+
+    .resource-card h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1.05rem;
+      color: #0f172a;
+      text-align: center;
+    }
+
+    .resource-card p {
+      margin: 0 0 14px;
+      color: var(--muted);
+    }
+
+    .resource-card a {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    .confirm-box {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #f9fbff;
+    }
+
+    .confirm-box input[type="checkbox"] {
+      margin-top: 5px;
+      transform: scale(1.2);
+      accent-color: var(--success);
+    }
+
+    .actions {
+      text-align: center;
+      margin-top: 24px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      background: var(--primary);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.25s ease, transform 0.2s ease;
+      font-size: 1rem;
+      opacity: 0.55;
+      pointer-events: none;
+    }
+
+    .btn.enabled {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .btn.enabled:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .footer-note {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 640px) {
+      .hero h1 {
+        font-size: 1.55rem;
+      }
+
+      .content {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="hero">
+        <img src="images/quiz.jpg" alt="صورة توضيحية للكويز">
+        <h1>مرحبًا بطلبة السنة الأولى تداول في الكويز الثالث </h1>
+        <p>
+         تم اعداد الكويز والاسئلة من قبل <strong>الاستاذ زيات عادل</strong>.
+        </p>
+      </div>
+
+      <div class="content">
+        <div class="section">
+          <h2>توجيهات مهمة</h2>
+          <ul>
+            <li>اقرأ كل سؤال بعناية قبل اختيار الإجابة.</li>
+            <li>تأكد من مراجعة الدروس المدرجة أسفل هذه الصفحة.</li>
+            <li>لا تنتقل إلى صفحة إدخال المعلومات إلا بعد التأكد من أنك جاهز لاجتياز الكويز.</li>        
+            <li>عند الانتهاء من الاجابة عن الاسئلة تظهر لك صفحة انتهاء الكويز،<strong>يجب عليك الضغط على حفظ النتيجة في </strong> Google Sheet </li>
+          </ul>
+        </div>
+        
+        <div class="section">
+          <div class="notice">
+         آخر أجل لتسليم الكويز هو 05 ماي 2026.
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>الكويز مخصص لاختبار مكتسبات الطالب في الدروس التالية:</h2>
+          <div class="resources">
+
+            <div class="resource-card">
+              <a href="https://economy-courses.univ-setif.dz/login/index.php" target="_blank">
+                <img src="images/input output.png" alt="فيديو الدرس">
+              </a>
+              <a href="https://www.youtube.com/@adelziet4897" target="_blank">
+               الانتقال الى فيديو الدرس
+              </a>
+            </div>
+
+            <div class="resource-card">
+              
+            </div>
+
+            <div class="resource-card">
+              <a href="https://economy-courses.univ-setif.dz/login/index.php" target="_blank">
+                <img src="images/pandas.png" alt="فيديو الدرس">
+              </a>
+              <a href="https://www.youtube.com/@adelziet4897" target="_blank">
+                الانتقال الى فيديو الدرس
+              </a>
+            </div>
+
+            <div class="resource-card">
+              
+            </div>
+
+            <div class="resource-card">
+              
+            </div>
+            
+            <div class="resource-card">
+              
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="confirm-box">
+            <input type="checkbox" id="confirmRead">
+            <label for="confirmRead">
+              <strong>أؤكد أنني اطلعت على الدروس وأنا مستعد للانتقال إلى الكويز.</strong>
+            </label>
+          </div>
+        </div>
+        <div class="section">
+          <h2>التحقق من رقم التسجيل (بجب كتابة رقم التسجيل كاملا xxxxxxxxxxxx)</h2>
+          <input type="text" id="regNumber" placeholder="أدخل رقم التسجيل كاملا " style="
+            width:100%;
+            padding:12px;
+            border-radius:10px;
+            border:1px solid #ccc;
+            text-align:center;
+            font-size:16px;
+          ">
+          <div id="regMessage" style="text-align:center; margin-top:10px; font-weight:bold;"></div>
+        </div>
+        <div class="actions">
+          <a id="nextBtn" class="btn" href="index1_4bis.html">إدخال المعلومات</a>
+          <div class="footer-note">لن يتم تفعيل الزر إلا بعد وضع علامة في خانة التأكيد.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  const confirmRead = document.getElementById('confirmRead');
+  const nextBtn = document.getElementById('nextBtn');
+  const regNumberInput = document.getElementById('regNumber');
+  const regMessage = document.getElementById('regMessage');
+
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxD_dQqN6P_pILjphwKtcbyMbA7_RaVM_R6xjHv4SqJ9zy7qKx89aq3clZZXfLaO9Qe/exec";
+
+  let isRegAllowed = false;
+
+  function updateButtonState() {
+    if (confirmRead.checked && isRegAllowed) {
+      nextBtn.classList.add('enabled');
+      nextBtn.href = `index1_4bis.html?regNumber=${encodeURIComponent(regNumberInput.value.trim())}`;
+    } else {
+      nextBtn.classList.remove('enabled');
+    }
+  }
+
+  async function checkRegistrationNumber() {
+    const regNumber = regNumberInput.value.trim();
+    regMessage.textContent = "";
+    regMessage.style.color = "red";
+    isRegAllowed = false;
+    updateButtonState();
+
+    if (!regNumber) {
+      return;
+    }
+
+    regMessage.textContent = "جارٍ التحقق...";
+    regMessage.style.color = "#0d6efd";
+
+    try {
+      const response = await fetch(`${SCRIPT_URL}?regNumber=${encodeURIComponent(regNumber)}`);
+      const data = await response.json();
+
+      if (data.status === "success" && data.allowed) {
+        isRegAllowed = true;
+        regMessage.textContent = "رقم التسجيل صحيح، يمكنك المتابعة.";
+        regMessage.style.color = "green";
+      } else {
+        isRegAllowed = false;
+        regMessage.textContent = "رقم التسجيل غير موجود في القائمة المسموح لها.";
+        regMessage.style.color = "red";
+      }
+    } catch (error) {
+      isRegAllowed = false;
+      regMessage.textContent = "حدث خطأ أثناء التحقق من رقم التسجيل.";
+      regMessage.style.color = "red";
+    }
+
+    updateButtonState();
+  }
+
+  confirmRead.addEventListener('change', updateButtonState);
+  regNumberInput.addEventListener('blur', checkRegistrationNumber);
+  regNumberInput.addEventListener('input', function () {
+    isRegAllowed = false;
+    regMessage.textContent = "";
+    updateButtonState();
+  });
+  
+</script>
+</body>
+</html>

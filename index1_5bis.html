@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>الجزء الثاني - تمرين Google Colab</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: #333;
+      direction: rtl;
+    }
+    header {
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    header img { height: 80px; filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3)); }
+    header h2 { flex: 1; text-align: center; font-size: 1.5rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      border-radius: 20px;
+      animation: fadeIn 0.5s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .form-title {
+      font-size: 1.8rem;
+      color: #2a5298;
+      margin-bottom: 15px;
+      text-align: center;
+      font-weight: bold;
+    }
+    .subtitle {
+      text-align: center;
+      color: #555;
+      margin-bottom: 25px;
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+    .note {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      color: #856404;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      line-height: 1.9;
+      text-align: center;
+    }
+    .section {
+      background: #f8f9fa;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-right: 5px solid #667eea;
+    }
+    .section h3 {
+      color: #2a5298;
+      margin-bottom: 12px;
+      font-size: 1.25rem;
+      text-align: center;
+    }
+    .section p, .section li {
+      line-height: 1.9;
+      font-size: 1rem;
+    }
+    ul, ol { padding-right: 25px; }
+    .question-card {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      border: 1px solid #e9ecef;
+    }
+    .question-number {
+      display: inline-block;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 1.4rem;
+      background: #e3f2fd;
+      color: #1976d2;
+      margin-bottom: 12px;
+    }
+    .question-text-ar {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #333;
+      margin-bottom: 15px;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      border-right: 4px solid #667eea;
+    }
+    .question-code {
+      background: #2d2d2d;
+      color: #f8f8f2;
+      padding: 15px;
+      border-radius: 10px;
+      font-family: 'Courier New', 'Consolas', monospace;
+      font-size: 1rem;
+      overflow-x: auto;
+      direction: ltr;
+      text-align: left;
+      margin-top: 10px;
+      white-space: pre-wrap;
+      line-height: 1.7;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    }
+    .data-table th, .data-table td {
+      padding: 12px;
+      border: 1px solid #dbe5ef;
+      text-align: center;
+      font-size: 1rem;
+    }
+    .data-table th {
+      background: #e3f2fd;
+      color: #1976d2;
+      font-weight: bold;
+    }
+    .data-table td {
+      background: #fcfdff;
+    }
+    .table-caption {
+      margin-top: 10px;
+      margin-bottom: 8px;
+      color: #2a5298;
+      font-weight: bold;
+      text-align: center;
+    }
+    .important {
+      background: #e8f0fe;
+      border-right: 5px solid #667eea;
+      padding: 18px;
+      border-radius: 15px;
+      margin: 20px 0;
+      text-align: center;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #2c3e50;
+    }
+    .btn {
+      display: inline-block;
+      padding: 14px 30px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      text-decoration: none;
+      margin-top: 10px;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+    .footer-note {
+      text-align: center;
+      margin-top: 25px;
+      color: #666;
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+    @media (max-width: 768px) {
+      .container { margin: 10px; padding: 15px; }
+      header { flex-direction: column; text-align: center; }
+      header h2 { font-size: 1rem; }
+      header img { height: 50px; }
+      .form-title { font-size: 1.4rem; }
+      .question-code { font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="images/logo_faculte.png" alt="شعار الكلية" onerror="this.style.display='none'">
+    <h2>
+      كلية العلوم الاقتصادية والتجارية وعلوم التسيير<br>
+      قسم العلوم الاقتصادية<br>
+      السنة الأولى تداول وأسواق مالية
+    </h2>
+    <img src="images/logo_departement.png" alt="شعار القسم" onerror="this.style.display='none'">
+  </header>
+
+  <div class="container">
+    <div class="form-title">تمرين</div>
+    <p class="subtitle">
+   <STrong>***************************</STrong>
+    </p>
+
+    <div class="note">
+      <strong>تعليمات مهمة:</strong><br>
+      يجب حل هذا التمرين داخل نفس ملف Google Colab الذي شاركته مع الأستاذ .<br>
+      أي عبر الامايل: tadawilaswak@gmail.com<br>
+      <strong>يمكن الاستعانة يالذكاء الاصطناعي عند حل التمرين بشرط فهم الحل الذي يقدمه لك </strong>    
+    </div>
+
+    <div class="section">
+      
+      <p>
+  ليكن لديك البيانات التالية التي تمثل نتائج مجموعة من الطلبة في اختبار مقياس Python.
+  المطلوب كتابة برنامج باستعمال مكتبات <strong>pandas</strong> و <strong>numpy</strong> و <strong>matplotlib</strong>
+  من أجل تخزين البيانات، تحليلها، ثم تمثيلها بيانياً.
+</p>
+
+<div class="table-caption">بيانات الطلبة:</div>
+<table class="data-table">
+  <thead>
+    <tr>
+      <th>الاسم</th>
+      <th>رقم التسجيل</th>
+      <th>النقطة</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Ahmed</td><td>2024001</td><td>14</td></tr>
+    <tr><td>Sara</td><td>2024002</td><td>16</td></tr>
+    <tr><td>Yacine</td><td>2024003</td><td>9</td></tr>
+    <tr><td>Imane</td><td>2024004</td><td>12</td></tr>
+    <tr><td>Karim</td><td>2024005</td><td>7</td></tr>
+    <tr><td>samia</td><td>2024006</td><td>5</td></tr>
+    <tr><td>cerine</td><td>2024007</td><td>15</td></tr>
+  </tbody>
+</table>
+
+<div class="question-card">
+  <span class="question-number">المطلوب</span>
+
+  <div class="question-text-ar">
+    1- أنشئ <strong>DataFrame</strong> باستعمال مكتبة <strong>pandas</strong> يحتوي على بيانات الطلبة: الاسم، رقم التسجيل، والنقطة.
+  </div>
+
+  <div class="question-text-ar">
+    2- اعرض أول خمسة أسطر من البيانات باستعمال الدالة <strong>head()</strong>.
+  </div>
+
+  <div class="question-text-ar">
+    3- استعمل مكتبة <strong>numpy</strong> لحساب معدل نقاط الطلبة.
+  </div>
+
+  <div class="question-text-ar">
+    4- أضف عموداً جديداً اسمه <strong>result</strong>، تكون قيمته <strong>ناجح</strong> إذا كانت النقطة أكبر أو تساوي 10، و <strong>راسب</strong> إذا كانت أقل من 10.
+  </div>
+
+  <div class="question-text-ar">
+    5- احسب عدد الطلبة الناجحين وعدد الطلبة الراسبين باستعمال الدالة <strong>value_counts()</strong>.
+  </div>
+
+  <div class="question-text-ar">
+    6- أضف طالباً جديداً إلى <strong>DataFrame</strong> باستعمال البيانات التالية:
+  </div>
+
+  <div class="table-caption">معلومات الطالب الجديد:</div>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>الاسم</th>
+        <th>رقم التسجيل</th>
+        <th>النقطة</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Meriem</td><td>2024006</td><td>4</td></tr>
+    </tbody>
+  </table>
+
+  <div class="question-text-ar">
+    7- استعمل مكتبة <strong>matplotlib</strong> لرسم مخطط أعمدة يوضح نقاط الطلبة، بحيث تكون أسماء الطلبة على المحور الأفقي والنقاط على المحور العمودي.
+  </div>
+</div>
+    
+    <div class="note">
+      <strong>تنبيه</strong><br>
+     الحل يجب ان يتم عبر منصة google colab<br>
+    </div>
+    
+    <div style="text-align:center;">
+      <a class="btn" href="https://colab.research.google.com/" target="_blank">فتح Google Colab</a>
+    </div>
+
+    <div class="footer-note">
+    <h3>تم إعداد التمرين من قبل <strong>الدكتور زيات عادل</strong></h3>
+    </div>
+</body>
+</html>
